@@ -1,10 +1,10 @@
 import {Driver} from './driver';
 
-export class HandlerFactory {
+export class Handler {
 
     constructor(private readonly initDriver: () => Promise<Driver>) {}
 
-    readonly handler = async (): Promise<void> => {
+    readonly invoke = async (): Promise<void> => {
         const {goTo, getUrl} = await this.initDriver();
         await goTo('https://www.google.com/');
         const url = await getUrl();

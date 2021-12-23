@@ -1,4 +1,4 @@
-import {HandlerFactory} from './handler';
+import {Handler} from './handler';
 import {SeleniumDriver, SeleniumDriverOptions} from './driver';
 
 const options: SeleniumDriverOptions = {
@@ -18,4 +18,4 @@ const options: SeleniumDriverOptions = {
     driverPath: '/opt/chromedriver/chromedriver'
 };
 const initDriver = SeleniumDriver.create(options);
-export const {handler} = new HandlerFactory(initDriver);
+export const {invoke: handler} = new Handler(initDriver);
