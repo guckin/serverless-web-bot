@@ -1,10 +1,40 @@
-# Template Lambda
+# Serverless web bot
 
-Typescript/Node template for AWS Lambda that deploys with AWS SAM using Github Actions
+Serverless web bot template for using selenium on AWS Lambda
 
-### Prerequisites
+### Test locally
+You will need to use [aws-sam-cli](https://aws.amazon.com/serverless/sam/)
 
-* IAM User with the following policies 
+Test the function run locally using: 
+```
+sam build
+sam local invoke
+```
+
+### Deploy to AWS
+Deploy to aws using:
+```
+sam build
+sam deploy --guided
+```
+Follow the prompts. It will ask you if it can create an ECR repository for the functions, select `Y`.
+It will generate a new `samconfig.toml` file for you. You should commit this file to Git for future automated deployments
+
+The deployment actions will deploy this repo to your aws account using aws-sam-cli
+
+#### Automated deployment
+
+There is a Github action setup to test and deploy the application. 
+For Github to deploy this application to your AWS account it needs credentials with the necessary IAM role. 
+The following are Github Secrets you should define for this repository:
+```
+`AWS_ACCESS_KEY_ID` : IAM access key ID.
+
+`AWS_SECRET_ACCESS_KEY` : IAM access key
+
+`AWS_REGION` : Deployment region
+```
+The IAM user should have the following policies defined:
 ```
 IAMFullAccess
 AmazonEC2ContainerRegistryFullAccess
@@ -13,27 +43,12 @@ AmazonAPIGatewayAdministrator
 AWSCloudFormationFullAccess
 AWSLambda_FullAccess
 ```
-* ECR repository to house the lambda docker images.
-  See [How to create a ECR repository](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-create.html)
-
-### Configuration
-
-Here are the following Github Secrets you should define for this repository:
-
-`AWS_ACCESS_KEY_ID` IAM access key ID.
-
-`AWS_SECRET_ACCESS_KEY` IAM access key
-
-`AWS_REGION` Deployment region
-
-`ECR_REPO_URL` URI of the ECR repository. The repository must be in the same region as Deployment region 
-
 
 ### Development
 
 Install dependencies
 ```
-npm i
+npm ci
 ```
 
 running tests

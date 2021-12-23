@@ -1,17 +1,15 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  lambda-template
-
-  Sample SAM Template for lambda-template
+  serverless-web-bot
   
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 10
 
 Resources:
-  HelloWorldFunction:
+  BotFn:
     Type: AWS::Serverless::Function
     Properties:
       PackageType: Image
@@ -24,9 +22,9 @@ Resources:
       Dockerfile: Dockerfile
 
 Outputs:
-  HelloWorldFunction:
-    Description: "Hello World Lambda Function ARN"
-    Value: !GetAtt HelloWorldFunction.Arn
-  HelloWorldFunctionIamRole:
-    Description: "Implicit IAM Role created for Hello World function"
-    Value: !GetAtt HelloWorldFunctionRole.Arn
+  BotFnArn:
+    Description: "Bot function arn"
+    Value: !GetAtt BotFn.Arn
+  BotFnIamRole:
+    Description: "Implicit IAM Role created"
+    Value: !GetAtt BotFn.Arn
